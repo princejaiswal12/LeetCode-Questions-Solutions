@@ -1,16 +1,13 @@
-# Method 3: Correlated subquery
+#Method 1: LIMIT + OFFSET (recommended)
 
 CREATE FUNCTION getNthHighestSalary(N INT) RETURNS INT
 BEGIN
+  SET N = N - 1;
+
   RETURN (
-      SELECT DISTINCT e1.salary
-      FROM Employee e1
-      WHERE (
-          SELECT COUNT(DISTINCT e2.salary)
-          FROM Employee e2
-          WHERE e2.salary > e1.salary
-      ) = N - 1
-      LIMIT 1
+      SELECT DISTINCT salary
+      FROM Employee
+      ORDER BY salary DESC
+      LIMIT 1 OFFSET N
   );
 END
-
