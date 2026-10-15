@@ -1,4 +1,4 @@
-# m2
+# Method 2: DENSE_RANK()
 CREATE FUNCTION getNthHighestSalary(N INT) RETURNS INT
 BEGIN
   RETURN (
